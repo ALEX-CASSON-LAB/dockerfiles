@@ -1,5 +1,5 @@
 # Set base OS
-# FROM ubuntu:latest
+# FROM ubuntu:latest 
 FROM ubuntu:26.04
 
 
