@@ -69,7 +69,7 @@ RUN mkdir -p ~/miniconda3 \
 
 
 # Add meta-data
-LABEL org.opencontainers.image.version="v26.5.22" \
+LABEL org.opencontainers.image.version="v26.7.03" \
       org.opencontainers.image.authors="Alex Casson <alex.casson@manchester.ac.uk>" \
       org.opencontainers.image.title="Main programming dockerfile" \
       org.opencontainers.image.source="https://github.com/ALEX-CASSON-LAB/dockerfiles/dockerfile_main" \
