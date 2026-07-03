@@ -58,15 +58,29 @@ ENV UV_LINK_MODE=copy \
 
 # Install Python environment as used in paper
 USER vscode
-RUN mkdir -p ~/miniconda3 \
-    && wget https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh \
-    && bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 \
-    && rm ~/miniconda3/miniconda.sh \
-    && source ~/miniconda3/bin/activate \
-    && conda create --name andrius python=3.6 \
-    && conda activate andrius \
-    && conda install --yes --file requirements-andrius_sci_rep.txt \
+#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ARG TARGETARCH
 
+RUN set -eux; \
+    case "${TARGETARCH}" in \
+      amd64) CONDA_ARCH="x86_64" ;; \
+      arm64) CONDA_ARCH="aarch64" ;; \
+      *) echo "Unsupported TARGETARCH=${TARGETARCH}" >&2; exit 1 ;; \
+    esac; \
+    mkdir -p /opt/miniconda; \
+    wget -O /tmp/miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-${CONDA_ARCH}.sh"; \
+    bash /tmp/miniconda.sh -b -p /opt/miniconda; \
+    rm -f /tmp/miniconda.sh
+
+#RUN mkdir -p ~/miniconda3 \
+#    && wget https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh \
+#    && bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 \
+#    && rm ~/miniconda3/miniconda.sh \
+#    && source ~/miniconda3/bin/activate \
+#    && conda create --name andrius python=3.6 \
+#    && conda activate andrius \
+#    && conda install --yes --file requirements-andrius_sci_rep.txt \
+RUN . /opt/miniconda3/bin/activate && conda create --name andrius python=3.6 && conda activate andrius && conda install --yes --file requirements-andrius_sci_rep.txt
 
 # Add meta-data
 LABEL org.opencontainers.image.version="v26.07.03" \
