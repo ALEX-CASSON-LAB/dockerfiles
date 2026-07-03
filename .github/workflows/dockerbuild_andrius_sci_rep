@@ -5,7 +5,7 @@ name: Create and publish a Docker image
 on:
   push:
     branches: ['main']
-    paths: ['./dockerfile_andrius_sci_rep']
+    paths: ['dockerfile_andrius_sci_rep']
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
@@ -69,7 +69,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
-          file: ./dockerfile_main
+          file: ./dockerfile_andrius_sci_rep
           platforms: linux/amd64, linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
