@@ -66,7 +66,7 @@ RUN set -eux; \
     esac; \
     mkdir -p /opt/miniconda; \
     wget -O /tmp/miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-${CONDA_ARCH}.sh";\
-    bash /tmp/miniconda3/miniconda.sh -b -u -p /opt/miniconda3 \
+    bash /tmp/miniconda.sh -b -u -p /opt/miniconda \
     rm -f /tmp/miniconda.sh
 
 USER vscode
