@@ -65,7 +65,8 @@ RUN set -eux; \
       *) echo "Unsupported TARGETARCH=${TARGETARCH}" >&2; exit 1 ;; \
     esac; \
     mkdir -p /opt/miniconda; \
-    wget -O /tmp/miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-${CONDA_ARCH}.sh"; \
+    wget -O /tmp/miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-${CONDA_ARCH}.sh";
+
 #    bash /tmp/miniconda.sh -b -p /opt/miniconda; \
 #    rm -f /tmp/miniconda.sh
 
