@@ -65,11 +65,11 @@ RUN mkdir -p ~/miniconda3 \
     && source ~/miniconda3/bin/activate \
     && conda create --name andrius python=3.6 \
     && conda activate andrius \
-    && conda install --yes --file requirements-andrius_sci_rep.txt
+    && conda install --yes --file requirements-andrius_sci_rep.txt \
 
 
 # Add meta-data
-LABEL org.opencontainers.image.version="v26.7.03" \
+LABEL org.opencontainers.image.version="v26.07.03" \
       org.opencontainers.image.authors="Alex Casson <alex.casson@manchester.ac.uk>" \
       org.opencontainers.image.title="Main programming dockerfile" \
       org.opencontainers.image.source="https://github.com/ALEX-CASSON-LAB/dockerfiles/dockerfile_main" \
