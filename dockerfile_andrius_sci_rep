@@ -69,10 +69,13 @@ RUN set -eux; \
     bash /tmp/miniconda.sh -b -u -p /opt/miniconda \
     rm -f /tmp/miniconda.sh
 
+
+
 USER vscode
-RUN mkdir -p "${HOME}/miniconda" \
-    && ln -s /opt/miniconda "${HOME}/miniconda" 
-ENV PATH="${HOME}/miniconda/bin:${PATH}"
+ENV PATH="/opt/miniconda/bin:${PATH}"
+#RUN mkdir -p "${HOME}/miniconda" \
+#    && ln -s /opt/miniconda "${HOME}/miniconda" 
+#ENV PATH="${HOME}/miniconda/bin:${PATH}"
 RUN set -eux; \
     conda create -y -n andrius python=3.6; \
     conda run -n andrius conda install -y --file requirements-andrius_sci_rep.txt
