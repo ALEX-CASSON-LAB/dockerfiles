@@ -75,9 +75,25 @@ USER vscode
 ENV PATH="/opt/miniconda/bin:${PATH}"
 WORKDIR /tmp/build
 COPY requirements-andrius_sci_rep.txt /tmp/build/requirements-andrius_sci_rep.txt
+
 RUN set -eux; \
+    # Use legacy channel locations first (example endpoints - replace with your validated mirror/snapshot)
+    conda config --system --remove-key channels || true; \
+    conda config --system --add channels https://repo.anaconda.com/pkgs/main; \
+    conda config --system --add channels https://repo.anaconda.com/pkgs/r; \
+    conda config --system --set channel_priority strict; \
+    conda config --system --set restore_free_channel true; \
+    \
+    # Keep solver deterministic for old stacks
+    conda config --system --set solver classic; \
+    \
     conda create -y -n andrius python=3.6; \
-    conda run -n andrius conda install -y --file /tmp/build/requirements-andrius_sci_rep.txt
+    conda run -n andrius conda install -y --file /tmp/build/requirements-andrius_sci_rep.txt; \
+    conda clean -afy
+
+#RUN set -eux; \
+#    conda create -y -n andrius python=3.6; \
+#    conda run -n andrius conda install -y --file /tmp/build/requirements-andrius_sci_rep.txt
 
 #RUN mkdir -p ~/miniconda3 \
 #    && wget https://repo.anaconda.com/miniconda/Miniconda3-py37_23.1.0-1-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh \
