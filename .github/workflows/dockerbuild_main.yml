@@ -32,17 +32,6 @@ jobs:
           VER=$(grep org.opencontainers.image.version ${{ github.workspace }}/dockerfile_main | cut -d'"' -f 2)
           echo "VERSION=$VER" >> $GITHUB_ENV
 
-      - name: Set up Docker
-        uses: docker/setup-docker-action@v5
-        with:
-          daemon-config: |
-            {
-              "debug": true,
-              "features": {
-                "containerd-snapshotter": true
-              }
-            }
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
