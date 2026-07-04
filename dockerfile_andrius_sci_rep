@@ -71,7 +71,7 @@ RUN set -eux; \
 
 
 
-USER vscode
+#USER vscode
 ENV PATH="/opt/miniconda/bin:${PATH}"
 WORKDIR /tmp/build
 COPY requirements-andrius_sci_rep.txt /tmp/build/requirements-andrius_sci_rep.txt
