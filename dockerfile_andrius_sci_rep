@@ -1,6 +1,6 @@
 # Set base OS
 # FROM ubuntu:latest
-FROM ubuntu:24.04
+FROM ubuntu:24.04 
 
 
 # Remove default user ubuntu. Assumes using 23.04 or newer (no checks are present)
